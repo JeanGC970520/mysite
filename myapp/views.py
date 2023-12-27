@@ -35,9 +35,12 @@ def projects(request):
         'projects' : projects,
     })
 
-def task(request, id):
+def task(request):
     # * Usamos el metodo get_object_or_404() para que no marque un error
     # * sino que devuelva un 404 Not Found en caso que no exista el registro.
     # task = Task.objects.get(id=id)
     #task = get_object_or_404(Task, id=id)
-    return render(request, "task.html")
+    tasks = Task.objects.all()
+    return render(request, "task.html", {
+        'tasks' : tasks,
+    })
