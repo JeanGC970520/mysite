@@ -1,13 +1,13 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import get_object_or_404
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, render
 
 from .models import Project, Task
 
 # Create your views here.
 # Funciones que se ejecutaran cuando un end-point sea llamado. 
 def index(request):
-    return HttpResponse("Index page")
+    return render(request, "index.html")
 
 # ! Metodo que recibe un URL param llamado 'username'
 def hello(request, username):
@@ -15,18 +15,18 @@ def hello(request, username):
     return HttpResponse(f"<h1>Hello {username}</h1>")
 
 def about(request):
-    return HttpResponse("About")
+    return render(request, "about.html")
 
 
 def projects(request):
     # * En este caso devolvemos todos los registros de la tabla Projects.
     # * Con  un formato de lista y un tipo de respuesta JSON
-    projects = list(Project.objects.values())
-    return JsonResponse(projects, safe=False)
+    #projects = list(Project.objects.values())
+    return render(request, "projects.html")
 
 def task(request, id):
     # * Usamos el metodo get_object_or_404() para que no marque un error
     # * sino que devuelva un 404 Not Found en caso que no exista el registro.
     # task = Task.objects.get(id=id)
-    task = get_object_or_404(Task, id=id)
-    return HttpResponse(f"Task: {task.title}")
+    #task = get_object_or_404(Task, id=id)
+    return render(request, "task.html")
