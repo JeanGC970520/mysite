@@ -7,7 +7,12 @@ from .models import Project, Task
 # Create your views here.
 # Funciones que se ejecutaran cuando un end-point sea llamado. 
 def index(request):
-    return render(request, "index.html")
+    title = 'Django Course!!'
+    # ! Enviando datos al archivo HTML, que en realidad es un template que el Motor
+    # ! de Plantillas procesara y convertira finalmente en un HTML para el navegador.
+    return render(request, "index.html", {
+        'title' : title,
+    })
 
 # ! Metodo que recibe un URL param llamado 'username'
 def hello(request, username):
@@ -15,14 +20,20 @@ def hello(request, username):
     return HttpResponse(f"<h1>Hello {username}</h1>")
 
 def about(request):
-    return render(request, "about.html")
+    username = 'Jeanveloper'
+    return render(request, "about.html", {
+        'username' : username,
+    })
 
 
 def projects(request):
     # * En este caso devolvemos todos los registros de la tabla Projects.
     # * Con  un formato de lista y un tipo de respuesta JSON
-    #projects = list(Project.objects.values())
-    return render(request, "projects.html")
+    # projects = list(Project.objects.values())
+    projects = Project.objects.all()
+    return render(request, "projects.html", {
+        'projects' : projects,
+    })
 
 def task(request, id):
     # * Usamos el metodo get_object_or_404() para que no marque un error
