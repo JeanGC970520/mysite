@@ -10,4 +10,6 @@ urlpatterns = [
     # ! El cual es de tipo str y se llamara 'username', el metodo hello() del modulo views
     # ! tendra que recibir dicho parametro y hacer la operacion correspondiente.
     path("hello/<str:username>", views.hello),
+    path("projects/", views.projects),
+    path("task/<int:id>", views.task),
 ]
