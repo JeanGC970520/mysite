@@ -15,6 +15,7 @@ class Task(models.Model):
     # ! un Project, todo lo relacionado con el queremos que tambien se elimine, por lo cual
     # ! usamos el param on_delete en modo CASCADE.
     project = models.ForeignKey(Project, on_delete=models.CASCADE) 
+    done = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.title} - {self.project.name}" 
