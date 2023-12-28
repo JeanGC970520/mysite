@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 
 from .models import Project, Task
-from .forms import CreateNewTask
+from .forms import CreateNewTask, CreateNewProject
 
 # Create your views here.
 # Funciones que se ejecutaran cuando un end-point sea llamado. 
@@ -32,26 +32,28 @@ def projects(request):
     # * Con  un formato de lista y un tipo de respuesta JSON
     # projects = list(Project.objects.values())
     projects = Project.objects.all()
-    return render(request, "projects.html", {
+    return render(request, "projects/projects.html", {
         'projects' : projects,
     })
 
-def task(request):
+def tasks(request):
     # * Usamos el metodo get_object_or_404() para que no marque un error
     # * sino que devuelva un 404 Not Found en caso que no exista el registro.
     # task = Task.objects.get(id=id)
     #task = get_object_or_404(Task, id=id)
     tasks = Task.objects.all()
-    return render(request, "task.html", {
+    return render(request, "tasks/tasks.html", {
         'tasks' : tasks,
     })
 
 def createTask(request):
+    # ! Para cuando el front haga un request GET, se despliegue el formulario
     if request.method == 'GET':
         
-        return render(request, 'create_task.html', {
+        return render(request, 'tasks/create_task.html', {
             'form' : CreateNewTask(),
         })
+    # ! Para cuando desde el front se haga la peticion de crear una nueva tarea
     else:
         print(request.POST['title'])
         print(request.POST['description'])
@@ -60,4 +62,13 @@ def createTask(request):
             description=request.POST['description'],
             project_id=2,
         )
-        return redirect('/myapp/task')
+        return redirect('/myapp/tasks')
+
+def createProject(request):
+    if request.method == 'GET':
+        return render(request, 'projects/create_project.html', {
+            'form' : CreateNewProject(),
+        })
+    else:
+        Project.objects.create(name=request.POST['name'])
+        return redirect('/myapp/projects')
