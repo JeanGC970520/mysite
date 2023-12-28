@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 
 from .models import Project, Task
+from .forms import CreateNewTask
 
 # Create your views here.
 # Funciones que se ejecutaran cuando un end-point sea llamado. 
@@ -44,3 +45,19 @@ def task(request):
     return render(request, "task.html", {
         'tasks' : tasks,
     })
+
+def createTask(request):
+    if request.method == 'GET':
+        
+        return render(request, 'create_task.html', {
+            'form' : CreateNewTask(),
+        })
+    else:
+        print(request.POST['title'])
+        print(request.POST['description'])
+        Task.objects.create(
+            title=request.POST['title'],
+            description=request.POST['description'],
+            project_id=2,
+        )
+        return redirect('/myapp/task')
