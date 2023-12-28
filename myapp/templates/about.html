@@ -1,6 +1,13 @@
+{# Heredando base.html el cual proporciona una navegacion #}
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
 <h1>About</h1>
 
 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti accusantium cupiditate quae praesentium asperiores animi officiis, cum quia delectus officia velit distinctio in nihil amet perferendis facere quidem possimus autem quos incidunt. Animi quam quas est optio voluptatem velit odit dolores, voluptas nesciunt temporibus similique aliquam esse. Eos deserunt, minus cumque nobis sapiente atque eveniet. Quis voluptates explicabo est facilis itaque officiis blanditiis! Iure numquam maiores asperiores sequi ipsam voluptatum. Quidem commodi ut corrupti debitis, vel reprehenderit doloremque expedita facere cumque officiis iusto quisquam, molestiae ea sed quod ducimus magni atque voluptatibus recusandae corporis. Repudiandae, dignissimos voluptas? Deleniti, ex qui.</p>
 
 <!-- Utilizando los parametros pasados en el metodo render() en views.py -->
 <p>Website created by {{ username }}</p>
+
+{% endblock %}
