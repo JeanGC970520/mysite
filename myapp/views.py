@@ -62,7 +62,7 @@ def createTask(request):
             description=request.POST['description'],
             project_id=2,
         )
-        return redirect('/myapp/tasks')
+        return redirect('tasks')
 
 def createProject(request):
     if request.method == 'GET':
@@ -71,4 +71,4 @@ def createProject(request):
         })
     else:
         Project.objects.create(name=request.POST['name'])
-        return redirect('/myapp/projects')
+        return redirect('projects')
