@@ -1,1 +1,1 @@
-# mysite
+# Primer proyecto con Django
