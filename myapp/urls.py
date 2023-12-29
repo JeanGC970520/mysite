@@ -11,6 +11,7 @@ urlpatterns = [
     # ! tendra que recibir dicho parametro y hacer la operacion correspondiente.
     path("hello/<str:username>", views.hello, name="hello"),
     path("projects/", views.projects, name="projects"),
+    path("projects/<int:id>", views.proyectDetail, name="project_detail"),
     path("tasks/", views.tasks, name="tasks"),
     path("create_task/", views.createTask, name="create_task"),
     path("create_project/", views.createProject, name="create_project"),
